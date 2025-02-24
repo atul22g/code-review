@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import "prismjs/themes/prism-tomorrow.css"
+// import dotenv from 'dotenv'
+// dotenv.config()
 import Editor from "react-simple-code-editor"
 import prism from "prismjs"
 import Markdown from "react-markdown"
@@ -10,6 +12,7 @@ import './App.css'
 
 function App() {
   const [ code, setCode ] = useState(`function sum() { return 1 + 1}`)
+  
 
   const [ review, setReview ] = useState(``)
 
@@ -18,7 +21,7 @@ function App() {
   }, [])
 
   async function reviewCode() {
-    const response = await axios.post('http://localhost:3001/ai/get-review', { code })
+    const response = await axios.post(`${import.meta.env.VITE_Backend_Link}/ai/get-review`, { code })
     setReview(response.data)
   }
 
